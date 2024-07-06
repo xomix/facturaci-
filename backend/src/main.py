@@ -7,11 +7,12 @@ from src.database.config import TORTOISE_ORM
 # enable schemas to read relationship between models
 Tortoise.init_models(["src.database.models"], "models")
 
-from src.routes import appartments
+from src.routes import appartments, owners
 
 app = FastAPI()
 
 app.include_router(appartments.router)
+app.include_router(owners.router)
 
 register_tortoise(app, config=TORTOISE_ORM, generate_schemas=False)
 

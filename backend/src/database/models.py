@@ -6,12 +6,12 @@ class Owner(Model):
     full_name = fields.CharField(max_length=50, null=False)
     dni = fields.CharField(max_length=10, null=False)
     address = fields.CharField(max_length=40, null=False)
+    email = fields.CharField(max_length=40, null=False)
 
 class Appartment(Model):
     id = fields.IntField(pk=True)
-    #owner = fields.ForeignKeyField("models.Owners", related_name="id")
+    owner = fields.ForeignKeyField("models.Owner", related_name="appartments")
     alias = fields.CharField(max_length=20)
-    owner = fields.CharField(max_length=50, null=False)
     address = fields.CharField(max_length=40, null=False)
     zip_code = fields.CharField(max_length=5, null=False)
     city = fields.CharField(max_length=20, null=False)
