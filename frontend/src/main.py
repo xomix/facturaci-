@@ -1,7 +1,7 @@
 
-from bottle import route, run, static_file
+from bottle import get, run
 
-@route('/')
+@get('/')
 def index():
     with open("index.html", "r") as f:
         contents = f.read()
