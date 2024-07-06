@@ -13,3 +13,4 @@ class UpdateAppartment(BaseModel):
     zip_code: Optional[str] = Field(default=None)
     city    : Optional[str] = Field(default=None)
     province: Optional[str] = Field(default=None)
+    alias   : Optional[str] = Field(default=None)
