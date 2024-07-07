@@ -16,3 +16,10 @@ class Appartment(Model):
     zip_code = fields.CharField(max_length=5, null=False)
     city = fields.CharField(max_length=20, null=False)
     province = fields.CharField(max_length=10, null=False)
+
+class Receipt(Model):
+    id = fields.IntField(pk=True)
+    appartment = fields.ForeignKeyField("models.Appartment", related_name="receipts")
+    amount = fields.DecimalField(max_digits=7, decimal_places=2, null=False)
+    description = fields.CharField(max_length=40, null=False)
+    date = fields.DatetimeField(auto_now_add=True)
