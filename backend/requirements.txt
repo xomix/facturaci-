@@ -4,4 +4,9 @@ tortoise-orm
 pytesseract
 pdf2image
 numpy
-opencv
+#opencv
+bcrypt
+passlib
+python-jose
+python-multipart
+uvicorn

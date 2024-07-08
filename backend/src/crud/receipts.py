@@ -7,7 +7,6 @@ from src.schemas.receipts import ReceiptOutSchema, ReceiptInSchema, UpdateReceip
 async def get_receipts():
     return await ReceiptOutSchema.from_queryset(Receipt.all())
 
-
 async def get_receipt(receipt_id: int) -> ReceiptOutSchema:
     return await ReceiptOutSchema.from_queryset_single(Receipt.get(id=receipt_id))
 
@@ -24,11 +23,8 @@ async def delete_receipt(receipt_id: int) -> None:
 async def update_receipt(receipt_id: int, receipt: UpdateReceipt) -> ReceiptOutSchema:
     try:
         await ReceiptOutSchema.from_queryset_single(Receipt.get(id=receipt_id))
-    except DoesNotExist:
-        raise HTTPException(status_code=404, detail=f"Receipt {receipt_id} not found")
-    try:
-        await Receipt.filter(id=receipt_id).update(**receipt.dict(exclude_unset=True))
-        return await ReceiptOutSchema.from_queryset_single(Receipt.get(id=receipt_id))
-    except Exception as e:
-        print(e)
-        raise
+    except DoesNotExist as e:
+        raise HTTPException(status_code=404, detail=f"Receipt {receipt_id} not found") from e
+
+    await Receipt.filter(id=receipt_id).update(**receipt.dict(exclude_unset=True))
+    return await ReceiptOutSchema.from_queryset_single(Receipt.get(id=receipt_id))

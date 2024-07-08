@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, HTTPException
 from tortoise.contrib.fastapi import HTTPNotFoundError
 from tortoise.exceptions import DoesNotExist
 
@@ -26,11 +26,11 @@ async def get_appartments():
 async def get_appartment(appartment_id: int) -> AppartmentOutSchema:
     try:
         return await crud.get_appartment(appartment_id)
-    except DoesNotExist:
+    except DoesNotExist as e:
         raise HTTPException(
             status_code=404,
             detail="Appartment does not exist",
-        )
+        ) from e
 
 @router.post(
     "/appartments", response_model=AppartmentOutSchema
