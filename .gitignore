@@ -163,3 +163,10 @@ cython_debug/
 
 # VSCODE Settings
 .vscode
+
+# AERICH Migration models
+migrations/
+pyproject.toml
+
+# DB
+db.sqlite3*
