@@ -1,10 +1,11 @@
 import os
 
-DATABASE_URL = 'sqlite://db.sqlite3'
+connexion = "sqlite://example.db"
+if "DATABASE_URL" in os.environ:
+    connexion = os.environ.get("DATABASE_URL")
 
 TORTOISE_ORM = {
-    #"connections": {"default": os.environ.get("DATABASE_URL")},
-    "connections": {"default": DATABASE_URL},
+    "connections": {"default": connexion},
     "apps": {
         "models": {
             "models": [
